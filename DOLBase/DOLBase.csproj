@@ -131,6 +131,7 @@
     <Compile Include="Network\BaseClient.cs" />
     <Compile Include="Network\BaseServer.cs" />
     <Compile Include="Network\IPacket.cs" />
+    <Compile Include="Network\PacketExtensions.cs" />
     <Compile Include="Network\PacketIn.cs" />
     <Compile Include="Network\PacketOut.cs" />
     <Compile Include="Network\UPnPNat.cs" />

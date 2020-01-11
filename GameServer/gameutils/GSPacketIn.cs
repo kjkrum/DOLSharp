@@ -16,7 +16,9 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  */
+using System;
 using System.Reflection;
+using DOL.GS.PacketHandler;
 using DOL.Network;
 using log4net;
 
@@ -135,9 +137,10 @@ namespace DOL.GS
 		/// <returns></returns>
 		public override string ToString()
 		{
-			return
-				string.Format("GSPacketIn: Size={0} Sequence=0x{1:X4} Session={2} Parameter={3} ID=0x{4:X2}",
-							  m_psize, m_sequence, m_sessionID, m_parameter, m_id);
+			//return
+			//	string.Format("GSPacketIn: Size={0} Sequence=0x{1:X4} Session={2} Parameter={3} ID=0x{4:X2}",
+			//				  m_psize, m_sequence, m_sessionID, m_parameter, m_id);
+			return string.Format("[{0}] >>> 0x{1:X2} {2} ({3} bytes)", DateTime.Now.ToString("HH:mm:ss.fff"), m_id, Enum.GetName(typeof(eClientPackets), m_id), m_psize);
 		}
 	}
 }

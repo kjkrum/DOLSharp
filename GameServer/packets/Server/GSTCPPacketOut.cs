@@ -17,6 +17,7 @@
  *
  */
 using DOL.Network;
+using System;
 
 namespace DOL.GS.PacketHandler
 {
@@ -54,6 +55,18 @@ namespace DOL.GS.PacketHandler
 			m_packetCode = packetCode;
 			base.WriteShort(0x00); //reserved for size
 			base.WriteByte(packetCode);
+		}
+
+		/// <summary>
+		/// Info about the packet
+		/// </summary>
+		/// <returns></returns>
+		public override string ToString()
+		{
+			//return
+			//	string.Format("GSTCPPacketOut: Size={0} ID=0x{1:X2}",
+			//				  this.Length, m_packetCode);
+			return string.Format("[{0}] <<< TCP 0x{1:X2} {2} ({3} bytes)", DateTime.Now.ToString("HH:mm:ss.fff"), m_packetCode, Enum.GetName(typeof(eServerPackets), m_packetCode), this.Length);
 		}
 	}
 }

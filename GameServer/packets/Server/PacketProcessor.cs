@@ -32,6 +32,8 @@ using DOL.Network;
 using log4net;
 using Timer=System.Timers.Timer;
 using System.Collections.Generic;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace DOL.GS.PacketHandler
 {
@@ -114,19 +116,28 @@ namespace DOL.GS.PacketHandler
 		/// </summary>
 		protected readonly Queue<IPacket> m_lastPackets = new Queue<IPacket>(MAX_LAST_PACKETS);
 
+		protected FileStream fnord = new FileStream(@"C:\Users\Kevin\Desktop\MuhPackets.txt", FileMode.Append, FileAccess.Write);
+
 		/// <summary>
 		/// Saves the sent packet for debugging
 		/// </summary>
 		/// <param name="pak">The sent packet</param>
 		protected void SavePacket(IPacket pak)
 		{
-			lock (((ICollection)m_lastPackets).SyncRoot)
-			{
-				while (m_lastPackets.Count >= MAX_LAST_PACKETS)
-					m_lastPackets.Dequeue();
+			string s = pak.ToHumanReadable() + "\n";
+			var b = System.Text.Encoding.ASCII.GetBytes(s);
+			fnord.Write(b, 0, b.Length);
+			fnord.Flush();
 
-				m_lastPackets.Enqueue(pak);
-			}
+
+
+			//lock (((ICollection)m_lastPackets).SyncRoot)
+			//{
+			//	while (m_lastPackets.Count >= MAX_LAST_PACKETS)
+			//		m_lastPackets.Dequeue();
+
+			//	m_lastPackets.Enqueue(pak);
+			//}
 		}
 
 		/// <summary>

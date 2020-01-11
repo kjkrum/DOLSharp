@@ -17,6 +17,7 @@
  *
  */
 using DOL.Network;
+using System;
 
 namespace DOL.GS.PacketHandler
 {
@@ -61,6 +62,18 @@ namespace DOL.GS.PacketHandler
 			Capacity = (int)Length;
 
 			return (ushort)(Length-5);
+		}
+
+		/// <summary>
+		/// Info about the packet
+		/// </summary>
+		/// <returns></returns>
+		public override string ToString()
+		{
+			//return
+			//	string.Format("GSUDPPacketOut: Size={0} ID=0x{1:X2}",
+			//				  this.Length, m_packetCode);
+			return string.Format("[{0}] <<< UDP 0x{1:X2} {2} ({3} bytes)", DateTime.Now.ToString("HH:mm:ss.fff"), m_packetCode, Enum.GetName(typeof(eServerPackets), m_packetCode), this.Length);
 		}
 	}
 }
